@@ -47,4 +47,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LocationActivity.class);
         startActivity(intent);
     }
+
+    public void play(View view) {
+        startService(new Intent( this, MusicService.class ) );
+    }
+
+    public void stopPlaying(View view) {
+        stopService(new Intent( this, MusicService.class ) );
+    }
 }
