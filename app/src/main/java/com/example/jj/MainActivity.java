@@ -3,6 +3,9 @@ package com.example.jj;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
+    private ImageView imageView;
     private int clickCount = 0;
 
     @Override
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        imageView = findViewById(R.id.meow);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -54,5 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopPlaying(View view) {
         stopService(new Intent( this, MusicService.class ) );
+    }
+
+    public void blink(View view) {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                , R.anim.blink);
+        imageView.startAnimation(animation);
     }
 }
